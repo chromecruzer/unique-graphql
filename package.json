@@ -5,9 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "minify": "bunx terser app.js --source-map --mangle -o Production/main.min.js",
-    "start": "bun Production/main.min.js",
-    "dev": " bun --inspect --hot app.js"
+    "minify": "bunx terser app.js --source-map --mangle -o ./main.min.js",
+    "start": "bun ./main.min.js",
+    "dev": "nodemon --inspect app.js"
   },
   "keywords": [],
   "author": "",

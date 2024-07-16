@@ -7,8 +7,8 @@ import { mergeTypeDefs } from '@graphql-tools/merge';
 
 const typesArray = loadFilesSync('./schema/typeDefs', { extensions: ['gql', 'graphql'] });
 export const typeDefs = mergeTypeDefs(typesArray);
-import { queryResolvers } from './resolvers/queryResolvers';
-import { mutationResolvers } from './resolvers/mutationResolvers';  
+import { queryResolvers } from './resolvers/queryResolvers.js';
+import { mutationResolvers } from './resolvers/mutationResolvers.js';  
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
