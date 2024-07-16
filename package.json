@@ -1,24 +1,26 @@
 {
-  "name": "sushchat",
+  "name": "gql-vs-rest",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "minify": "terser app.js -o Production/main.min.js",
-    "start": "node Production/main.min.js",
-    "dev": "nodemon app.js"
+    "minify": "bunx terser app.js --source-map --mangle -o Production/main.min.js",
+    "start": "bun Production/main.min.js",
+    "dev": " bun --inspect --hot app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^5.3.0",
+    "colors": "^1.4.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^6.9.13",
-    "pug": "^3.0.3",
-    "socket.io": "^4.7.5",
-    "terser": "^5.31.1"
+    "morgan": "^1.10.0",
+    "terser": "^5.31.1",
+    "@graphql-tools/load-files": "^7.0.0",
+    "graphql": "^16.9.0",
+    "graphql-tools": "^9.0.1",
+    "graphql-yoga": "^5.5.0"
   }
 }
