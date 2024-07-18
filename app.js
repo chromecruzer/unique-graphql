@@ -39,7 +39,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Serve static files from the React app
-const clientBuildPath = join(__dirname, './chumma');
+const clientBuildPath = join(__dirname, 'chumma');
 app.use(express.static(clientBuildPath));
 
 // Handle SPA routing, return index.html for all unknown routes
