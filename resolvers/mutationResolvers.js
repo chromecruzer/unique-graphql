@@ -1,6 +1,6 @@
 // server/resolvers/mutationResolvers.js
 import { users } from "../_db.js";
-import { PubSub } from 'graphql-subscriptions'; 
+import { PubSub } from 'graphql-subscriptions';
 const pubsub = new PubSub(); // Create an instance of PubSub
 export const mutationResolvers = {
   Mutation: {
