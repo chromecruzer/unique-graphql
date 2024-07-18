@@ -1,5 +1,5 @@
 import express from 'express'
-import 'colors'
+import 'colors' 
 import { createSchema, createYoga } from 'graphql-yoga';
 // server/schema/index.js
 import { loadFilesSync } from '@graphql-tools/load-files';
@@ -8,10 +8,9 @@ import { mergeTypeDefs } from '@graphql-tools/merge';
 const typesArray = loadFilesSync('./schema/typeDefs', { extensions: ['gql', 'graphql'] });
 export const typeDefs = mergeTypeDefs(typesArray);
 import { queryResolvers } from './resolvers/queryResolvers.js';
-import { mutationResolvers } from './resolvers/mutationResolvers.js';  
+import { mutationResolvers } from './resolvers/mutationResolvers.js';   
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-
+import { dirname, join } from 'path'; 
 const resolvers = {
   ...queryResolvers,
   ...mutationResolvers,
@@ -44,7 +43,7 @@ app.use(express.static(clientBuildPath));
 
 // Handle SPA routing, return index.html for all unknown routes
 app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/graphql') || req.path === '/submit') {
+  if (req.path.startsWith('/graphql') || req.path === '/restapi') {
     return next();
   }
   res.sendFile(join(clientBuildPath, 'index.html'));
@@ -53,9 +52,9 @@ app.get('*', (req, res, next) => {
 app.use('/graphql', yoga);
 
 // Define other specific routes
-app.get('/submit', (req, res) => {
+app.get('/restapi', (req, res) => {
   // Handle /submit route
-  res.send('Submit endpoint');
+  res.send('Rest-api endpoint');
 });
 
 
