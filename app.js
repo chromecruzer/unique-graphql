@@ -1,5 +1,5 @@
 import express from 'express'
-import 'colors' 
+import 'colors'
 import { createSchema, createYoga } from 'graphql-yoga';
 // server/schema/index.js
 import { loadFilesSync } from '@graphql-tools/load-files';
@@ -8,16 +8,17 @@ import { mergeTypeDefs } from '@graphql-tools/merge';
 const typesArray = loadFilesSync('./schema/typeDefs', { extensions: ['gql', 'graphql'] });
 export const typeDefs = mergeTypeDefs(typesArray);
 import { queryResolvers } from './resolvers/queryResolvers.js';
-import { mutationResolvers } from './resolvers/mutationResolvers.js';   
+import { mutationResolvers } from './resolvers/mutationResolvers.js';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path'; 
+import { dirname, join } from 'path';
+import { users } from './_db.js';
 const resolvers = {
   ...queryResolvers,
   ...mutationResolvers,
 };
 
 // Define your GraphQL schema
-const schema = createSchema({ 
+const schema = createSchema({
   typeDefs,
   resolvers,
 });
@@ -54,7 +55,24 @@ app.use('/graphql', yoga);
 // Define other specific routes
 app.get('/restapi', (req, res) => {
   // Handle /submit route
-  res.send('Rest-api endpoint');
+  res.status(200).json({ users });
+});
+
+// DELETE endpoint to delete a user by ID
+app.delete('/restapi/:id', (req, res) => {
+  const { id } = req.params; // Get the id parameter from the request URL
+
+  // Find the index of the user with the given id
+  const index = users.findIndex(user => user.id === id);
+
+  if (index !== -1) {
+    // User found, delete it from the array
+    users.splice(index, 1);
+    return res.json({ msg: `User with id ${id} deleted successfully` });
+  } else {
+    // User not found
+    return res.status(404).json({ msg: `User with id ${id} not found` });
+  }
 });
 
 

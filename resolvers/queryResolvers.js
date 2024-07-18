@@ -4,7 +4,7 @@ export const queryResolvers = {
     Query: {
       hello: () => 'world',
       users: () => users,
-    user: (parent, { id }) => users.find(user => user.id === id)
+    user: (parent, { id }) => users.find(user => user.id === id)    
     },
   };
   
