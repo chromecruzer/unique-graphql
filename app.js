@@ -40,14 +40,15 @@ const __dirname = dirname(__filename);
 
 // Serve static files from the React app
 const clientBuildPath = join(__dirname, 'chumma');
-app.use(express.static(clientBuildPath));
+//app.use(express.static(clientBuildPath));
 
 // Handle SPA routing, return index.html for all unknown routes
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/graphql') || req.path === '/restapi') {
     return next();
   }
-  res.sendFile(join(clientBuildPath, 'index.html'));
+   //res.sendFile(join(clientBuildPath, 'index.html'));
+  res.redirect('/graphql')
 });
 // Use Yoga as a middleware in Express
 app.use('/graphql', yoga);
