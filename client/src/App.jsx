@@ -18,7 +18,7 @@ const UserForm = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://192.168.2.149:4000/restapi');
+      const response = await axios.get('/restapi');
       setUsers(response.data.users);
     } catch (error) {
       console.error(error);
@@ -33,7 +33,7 @@ const UserForm = () => {
     e.preventDefault();
     const startTime = Date.now();
     try {
-      const response = await axios.post('http://192.168.2.149:4000/graphql', {
+      const response = await axios.post('/graphql', {
         query: `
           mutation CreateUser($input: CreateUserInput!) {
             createUser(input: $input) {
@@ -72,7 +72,7 @@ const UserForm = () => {
     e.preventDefault();
     const startTime = Date.now();
     try {
-      const response = await axios.post('http://192.168.2.149:4000/graphql', {
+      const response = await axios.post('/graphql', {
         query: `
           mutation UpdateUser($id: ID!, $input: UpdateUserInput!) {
             updateUser(id: $id, input: $input) {
@@ -112,7 +112,7 @@ const UserForm = () => {
     e.preventDefault();
     const startTime = Date.now();
     try {
-      const response = await axios.post('http://192.168.2.149:4000/graphql', {
+      const response = await axios.post('/graphql', {
         query: `
           mutation DeleteUser($id: ID!) {
             deleteUser(id: $id) {
@@ -140,7 +140,7 @@ const UserForm = () => {
     e.preventDefault();
     const startTime = Date.now();
     try {
-      const response = await axios.delete(`http://192.168.2.149:4000/restapi/${formData.id}`);
+      const response = await axios.delete(`/restapi/${formData.id}`);
 
       const endTime = Date.now();
       setTimeTaken(endTime - startTime);
