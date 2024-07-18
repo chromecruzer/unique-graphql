@@ -130,6 +130,12 @@ const UserForm = () => {
       setTimeTaken(endTime - startTime);
       setResponse(response.data);
       fetchUsers(); // Refresh the user list
+      // Clear the form data
+      setFormData({
+        id: '',
+        name: '',
+        email: ''
+      });
     } catch (error) {
       console.error(error);
     }
@@ -146,6 +152,12 @@ const UserForm = () => {
       setTimeTaken(endTime - startTime);
       setResponse(response.data);
       fetchUsers(); // Refresh the user list
+      // Clear the form data
+      setFormData({
+        id: '',
+        name: '',
+        email: ''
+      });
     } catch (error) {
       console.error(error);
     }
