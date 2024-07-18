@@ -57,3 +57,9 @@ type CreateUserResponse {
   msg: String!
   user: User
 }
+
+type Subscription {
+  # userCreated: User
+  # userUpdated: User
+  userDeleted: User
+}

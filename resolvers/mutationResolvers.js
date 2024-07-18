@@ -1,5 +1,7 @@
 // server/resolvers/mutationResolvers.js
 import { users } from "../_db.js";
+import { PubSub } from 'graphql-subscriptions'; 
+const pubsub = new PubSub(); // Create an instance of PubSub
 export const mutationResolvers = {
   Mutation: {
     createUser: (parent, { input }) => {
@@ -20,6 +22,7 @@ export const mutationResolvers = {
       const index = users.findIndex(user => user.id === id);
       if (index !== -1) {
         const deletedUser = users.splice(index, 1)[0];
+        pubsub.publish('USER_DELETED', { userDeleted: deletedUser });
         return {
           id: deletedUser.id,
           success: true,
@@ -32,6 +35,11 @@ export const mutationResolvers = {
         success: false,
         message: 'User not found',
       };
+    }
+  },
+  Subscription: {
+    userDeleted: {
+      subscribe: () => pubsub.asyncIterator(['USER_DELETED'])
     }
   }
 };
