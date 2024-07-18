@@ -1,5 +1,6 @@
 import express from 'express'
 import 'colors'
+import cors from 'cors'
 import { createSchema, createYoga } from 'graphql-yoga';
 // server/schema/index.js
 import { loadFilesSync } from '@graphql-tools/load-files';
@@ -11,6 +12,7 @@ import { queryResolvers } from './resolvers/queryResolvers.js';
 import { mutationResolvers } from './resolvers/mutationResolvers.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import path from 'path'
 import { users } from './_db.js';
 const resolvers = {
   ...queryResolvers,
@@ -32,23 +34,25 @@ const yoga = createYoga({
 
 // Initialize Express app
 const app = express();
+app.use(cors())
 
 
-// Resolve __dirname and __filename using import.meta.url
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Resolve __dirname and __filename using import.meta.url 
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
+const __dirname = path.resolve(); /// sarvas...// 
 
 // Serve static files from the React app
 const clientBuildPath = join(__dirname, 'chumma');
-//app.use(express.static(clientBuildPath));
+app.use(express.static(clientBuildPath)); 
 
-// Handle SPA routing, return index.html for all unknown routes
+// Handle SPA routing, return index.html for all unknown routes 
 app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/graphql') || req.path === '/restapi') {
+  if (req.path.startsWith('/graphql') || req.path === '/restapi') { 
     return next();
   }
-   //res.sendFile(join(clientBuildPath, 'index.html'));
-  res.redirect('/graphql')
+   res.sendFile(join(clientBuildPath, 'index.html'));
+  //res.redirect('/graphql')
 });
 // Use Yoga as a middleware in Express
 app.use('/graphql', yoga);
@@ -61,7 +65,7 @@ app.get('/restapi', (req, res) => {
 
 // DELETE endpoint to delete a user by ID
 app.delete('/restapi/:id', (req, res) => {
-  const { id } = req.params; // Get the id parameter from the request URL
+  const { id } = req.params; // Get the id parameter from the request URL 
 
   // Find the index of the user with the given id
   const index = users.findIndex(user => user.id === id);
@@ -76,9 +80,10 @@ app.delete('/restapi/:id', (req, res) => {
   }
 });
 
-
+//const HOST = '192.168.2.149'
 // Define a port and start the server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}/graphql`.america);
+  //console.log(`Server is running on http://${HOST}:${PORT}/graphql`.america);
+  console.log(`Server is active on Port ${PORT}`)
 });
