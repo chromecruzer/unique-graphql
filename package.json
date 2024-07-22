@@ -10,7 +10,7 @@
   "scripts": {
     "minify": "bunx terser app.js --source-map --mangle -o ./main.min.js",
     "start": "bun ./PRODUCTION/bundle.js",
-    "build": "webpack && cd client && bun run build",
+    "build": "bun x webpack && cd client && bun run build",
     "dev": "nodemon --inspect app.js"
   },
   "keywords": [],
