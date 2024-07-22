@@ -1,17 +1,20 @@
 {
-  "name": "gql-vs-rest",
+  "name": "gqlrest",
   "version": "1.0.0",
-  "description": "",
+  "description": "Starter pack for Gql with React client and Express server @22-07-2024",
   "type": "module",
-  "main": "index.js",
+  "main": "bundle.js",
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
     "minify": "bunx terser app.js --source-map --mangle -o ./main.min.js",
     "start": "bun ./PRODUCTION/bundle.js",
-    "build": "webpack",
+    "build": "webpack && cd client && bun run build",
     "dev": "nodemon --inspect app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Shyam. M",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.24.9",
@@ -25,6 +28,7 @@
     "graphql": "^16.9.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-tools": "^9.0.1",
+    "graphql-ws": "^5.16.0",
     "graphql-yoga": "^5.5.0",
     "morgan": "^1.10.0",
     "terser": "^5.31.1",

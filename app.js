@@ -43,7 +43,7 @@ app.use(cors())
 const __dirname = path.resolve(); /// sarvas...// 
 
 // Serve static files from the React app
-const clientBuildPath = join(__dirname, 'chumma');
+const clientBuildPath = join(__dirname, 'client', 'dist');
 app.use(express.static(clientBuildPath)); 
 
 // Handle SPA routing, return index.html for all unknown routes 
