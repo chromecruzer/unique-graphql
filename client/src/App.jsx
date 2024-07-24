@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'tailwindcss/tailwind.css';
+import SubscriptionComponent from './components/Subscription';
 
 const UserForm = () => {
   const [formData, setFormData] = useState({
@@ -294,6 +295,7 @@ const UserForm = () => {
           </div>
         )}
       </div>
+      <div><SubscriptionComponent/></div>
     </div>
   );
 };

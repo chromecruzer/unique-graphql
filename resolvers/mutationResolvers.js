@@ -40,9 +40,16 @@ export const mutationResolvers = {
   Subscription: {
     userDeleted: {
       subscribe: () => pubsub.asyncIterator(['USER_DELETED'])
+    },
+    greetings: {
+      subscribe: () => pubsub.asyncIterator(['GREETINGS'])
     }
   }
 };
+
+setInterval(() => {
+  pubsub.publish('GREETINGS', { greetings: 'Hello, World!' });
+}, 5000);
 
 
 // const resolvers = {

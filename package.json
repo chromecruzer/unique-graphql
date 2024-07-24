@@ -2,16 +2,18 @@
   "name": "gqlrest",
   "version": "1.0.0",
   "description": "Starter pack for Gql with React client and Express server @22-07-2024",
-  "type": "module",
+  "type": "commonjs",
   "main": "bundle.js",
   "workspaces": [
     "client"
   ],
   "scripts": {
     "minify": "bunx terser app.js --source-map --mangle -o ./main.min.js",
-    "start": "bun ./PRODUCTION/bundle.js",
+    "start-bun": "bun ./PRODUCTION/bundle.js",
+    "start-node": "node ./PRODUCTION/bundle.js",
     "build": "bun x webpack && cd client && bun run build",
-    "dev": "nodemon --inspect app.js"
+    "dev": "nodemon --inspect app.js",
+    "bun-dev": "bun --hot --inspect  app.js"
   },
   "keywords": [],
   "author": "Shyam. M",
