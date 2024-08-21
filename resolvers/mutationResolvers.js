@@ -90,3 +90,22 @@ setInterval(() => {
 //     },
 //   },
 // };
+
+/** Query: {
+        users: async (_, args, context, info) => {
+            const { client } = context;
+            const requestedFields = info.fieldNodes[0].selectionSet.selections.map(selection => selection.name.value);
+            const columns = requestedFields.length ? requestedFields.join(', ') : '*';
+            const query = `SELECT ${columns} FROM users`;
+            const res = await client.query(query);
+            return res.rows;
+        },
+        user: async (_, { id }, context, info) => {
+            const { client } = context;
+            const requestedFields = info.fieldNodes[0].selectionSet.selections.map(selection => selection.name.value);
+            const columns = requestedFields.length ? requestedFields.join(', ') : '*';
+            const query = `SELECT ${columns} FROM users WHERE id = $1`;
+            const res = await client.query(query, [id]);
+            return res.rows[0];
+        }
+    }, */
